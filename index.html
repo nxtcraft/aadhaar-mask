@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R9EW10BJGW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R9EW10BJGW');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aadhaar Masking Tool – Redact Aadhaar Number Free Online</title>
+<meta name="description" content="Free online Aadhaar masking tool. Upload your Aadhaar card image or PDF and redact/mask the first 8 digits. No upload to server, 100% private, runs in your browser.">
+<link rel="canonical" href="https://nxtcraft.github.io/aadhaar-mask/">
+<meta property="og:title" content="Aadhaar Masking Tool – Redact Sensitive Info Free">
+<meta property="og:description" content="Mask Aadhaar number and other sensitive fields on ID documents. Runs entirely in your browser — no data leaves your device.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nxtcraft.github.io/aadhaar-mask/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/aadhaar-mask/manifest.json">
+<meta name="theme-color" content="#d97706">
+<meta name="mobile-web-app-capable" content="yes">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Aadhaar Masking Tool","url":"https://nxtcraft.github.io/aadhaar-mask/","description":"Redact and mask Aadhaar number on ID card images and PDFs. Free, private, browser-based.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my Aadhaar safe to upload here?","acceptedAnswer":{"@type":"Answer","text":"Yes. This tool runs 100% in your browser. Your document is never uploaded to any server."}},{"@type":"Question","name":"What does Aadhaar masking mean?","acceptedAnswer":{"@type":"Answer","text":"Masking hides the first 8 digits of the 12-digit Aadhaar number, showing only the last 4. UIDAI permits sharing masked Aadhaar for KYC purposes."}},{"@type":"Question","name":"Can I mask other sensitive information?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can draw mask boxes over any area — phone numbers, addresses, bank account numbers etc."}}]}</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0800;--surface:#14100a;--surface2:#1e170d;--border:#2d2210;--text:#fef3c7;--muted:#92400e;--accent:#d97706;--accent2:#f59e0b}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;gap:1.5rem;height:52px}
+.nav-brand{font-weight:700;font-size:1.1rem;color:var(--accent)}
+.nav-links{display:flex;gap:1rem;margin-left:auto}
+.nav-links a{font-size:.85rem;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+main{max-width:960px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.6rem;font-weight:700;margin-bottom:.4rem}
+.subtitle{color:var(--muted);margin-bottom:1.5rem;font-size:.95rem}
+.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:2.5rem;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:var(--surface)}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);background:var(--surface2)}
+.upload-zone input{display:none}
+.upload-icon{font-size:2.5rem;margin-bottom:.75rem}
+.upload-label{font-size:.95rem;color:var(--muted);margin-bottom:.5rem}
+.upload-hint{font-size:.8rem;color:var(--border);color:#5a4020}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:8px;border:none;cursor:pointer;font-size:.9rem;font-weight:600;transition:all .2s}
+.btn-primary{background:var(--accent);color:#000}
+.btn-primary:hover{background:var(--accent2)}
+.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{background:#7f1d1d;color:#fca5a5}
+.btn-danger:hover{background:#991b1b}
+.btn-sm{padding:.35rem .75rem;font-size:.8rem}
+.editor-area{display:none;gap:1rem}
+.editor-area.show{display:flex;flex-wrap:wrap}
+.canvas-wrap{flex:1;min-width:280px;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative}
+.canvas-wrap canvas{display:block;width:100%;height:auto;cursor:crosshair}
+.canvas-wrap canvas.select-mode{cursor:default}
+.sidebar{width:240px;flex-shrink:0;display:flex;flex-direction:column;gap:.75rem}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem}
+.panel h3{font-size:.9rem;font-weight:600;margin-bottom:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.field-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.75rem}
+label{font-size:.8rem;color:var(--muted)}
+select,input[type=text],input[type=range]{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:.4rem .6rem;font-size:.85rem}
+input[type=range]{padding:.25rem 0}
+.color-row{display:flex;gap:.5rem}
+.color-swatch{width:28px;height:28px;border-radius:6px;border:2px solid transparent;cursor:pointer;transition:border-color .2s}
+.color-swatch.active{border-color:var(--accent)}
+.mask-list{display:flex;flex-direction:column;gap:.4rem;max-height:180px;overflow-y:auto}
+.mask-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border-radius:6px;padding:.4rem .6rem;font-size:.8rem}
+.mask-item span{color:var(--muted)}
+.toolbar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.page-nav{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;font-size:.85rem}
+.page-nav button{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:.25rem .7rem;cursor:pointer}
+.page-nav button:disabled{opacity:.4;cursor:default}
+.badge{display:inline-block;background:var(--accent);color:#000;border-radius:4px;padding:.1rem .4rem;font-size:.7rem;font-weight:700}
+.info-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.5}
+.info-box strong{color:var(--text)}
+.faq{margin-top:2.5rem}
+.faq h2{font-size:1.1rem;margin-bottom:1rem}
+details{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem}
+summary{padding:.75rem 1rem;cursor:pointer;font-weight:600;font-size:.9rem;list-style:none}
+summary::after{content:'▸';float:right;transition:transform .2s}
+details[open] summary::after{transform:rotate(90deg)}
+details p{padding:.5rem 1rem 1rem;color:var(--muted);font-size:.88rem;line-height:1.6}
+footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);margin-top:3rem}
+</style>
+</head>
+<body>
+<nav>
+  <span class="nav-brand">🟠 AadhaarMask</span>
+  <div class="nav-links">
+    <a href="https://nxtcraft.github.io/" target="_blank">All Tools</a>
+    <a href="https://nxtcraft.github.io/pdflab/" target="_blank">PDFLab</a>
+  </div>
+</nav>
+<main>
+  <h1>Aadhaar Masking Tool</h1>
+  <p class="subtitle">Redact Aadhaar number & sensitive fields on ID documents. 100% private — runs in your browser, nothing uploaded.</p>
+
+  <div class="info-box">
+    <strong>How to use:</strong> Upload an Aadhaar card image or PDF → drag to draw mask boxes over the first 8 digits → optionally add text label → download. Works for any document redaction.
+  </div>
+
+  <div class="upload-zone" id="dropzone">
+    <input type="file" id="fileInput" accept="image/*,.pdf">
+    <div class="upload-icon">🪪</div>
+    <div class="upload-label">Drop your Aadhaar card or click to upload</div>
+    <div class="upload-hint">Supports JPG, PNG, WebP, PDF • Processed entirely in your browser</div>
+  </div>
+
+  <div class="editor-area" id="editorArea">
+    <div style="width:100%;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:.5rem">
+      <div class="page-nav" id="pageNav" style="display:none">
+        <button id="prevPage" onclick="changePage(-1)">◀</button>
+        <span id="pageLabel">Page 1 / 1</span>
+        <button id="nextPage" onclick="changePage(1)">▶</button>
+      </div>
+      <div class="toolbar">
+        <button class="btn btn-primary" id="drawBtn" onclick="setMode('draw')">✏️ Draw Mask</button>
+        <button class="btn btn-secondary" id="selectBtn" onclick="setMode('select')">🖱 Select</button>
+        <button class="btn btn-secondary btn-sm" onclick="undoLast()">↩ Undo</button>
+        <button class="btn btn-danger btn-sm" onclick="clearAll()">🗑 Clear All</button>
+      </div>
+    </div>
+
+    <div class="canvas-wrap">
+      <canvas id="mainCanvas"></canvas>
+    </div>
+
+    <div class="sidebar">
+      <div class="panel">
+        <h3>Mask Style</h3>
+        <div class="field-group">
+          <label>Fill Color</label>
+          <div class="color-row">
+            <div class="color-swatch active" style="background:#fff" onclick="setFill('#ffffff',this)" title="White"></div>
+            <div class="color-swatch" style="background:#111" onclick="setFill('#111111',this)" title="Black"></div>
+            <div class="color-swatch" style="background:#d97706" onclick="setFill('#d97706',this)" title="Amber"></div>
+            <div class="color-swatch" style="background:#1d4ed8" onclick="setFill('#1d4ed8',this)" title="Blue"></div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Label text (optional)</label>
+          <input type="text" id="labelText" placeholder="XXXX XXXX" maxlength="30">
+        </div>
+        <div class="field-group">
+          <label>Label font size: <span id="fszVal">14</span>px</label>
+          <input type="range" id="fszRange" min="8" max="32" value="14" oninput="document.getElementById('fszVal').textContent=this.value">
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Masks <span class="badge" id="maskCount">0</span></h3>
+        <div class="mask-list" id="maskList"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Download</h3>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <button class="btn btn-primary" onclick="downloadPNG()">⬇ Download PNG</button>
+          <button class="btn btn-secondary" onclick="downloadPDF()">⬇ Download PDF</button>
+        </div>
+        <p style="font-size:.75rem;color:var(--muted);margin-top:.6rem">Multi-page PDFs: all pages with their masks are included.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <details open>
+      <summary>Is my Aadhaar data safe?</summary>
+      <p>Completely. This tool runs entirely in your browser using JavaScript. Your document is never sent to any server. Once you close the tab, nothing is retained.</p>
+    </details>
+    <details>
+      <summary>What is Aadhaar masking?</summary>
+      <p>UIDAI (the Aadhaar authority) recommends masking/hiding the first 8 digits of the 12-digit Aadhaar number when sharing for KYC or verification — only the last 4 digits should be visible. This reduces misuse risk while still confirming identity.</p>
+    </details>
+    <details>
+      <summary>Can I use this for passports, PAN cards or other documents?</summary>
+      <p>Yes. This tool works on any image or PDF. You can redact any sensitive field — bank account numbers, phone numbers, addresses — by drawing mask boxes over them.</p>
+    </details>
+    <details>
+      <summary>Does it work on PDFs?</summary>
+      <p>Yes. Multi-page PDFs are fully supported. Navigate between pages using the arrows, apply masks to each page, and download as a single PDF.</p>
+    </details>
+  </div>
+</main>
+<footer>
+  <p>AadhaarMask by <a href="https://nxtcraft.github.io/">NxtCraft</a> — Free tools, no signup, no tracking of your data.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+const canvas = document.getElementById('mainCanvas');
+const ctx = canvas.getContext('2d');
+
+let mode = 'draw';
+let fillColor = '#ffffff';
+let pages = [];       // array of ImageData per page
+let pageMasks = [];   // array of mask arrays per page
+let currentPage = 0;
+let totalPages = 0;
+let isDragging = false;
+let startX, startY;
+let selectedMask = -1;
+let dragOffX, dragOffY;
+
+// ---- Upload ----
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+dropzone.addEventListener('click', () => fileInput.click());
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag'));
+dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('drag'); handleFile(e.dataTransfer.files[0]); });
+fileInput.addEventListener('change', e => handleFile(e.target.files[0]));
+
+async function handleFile(file) {
+  if (!file) return;
+  pages = []; pageMasks = []; currentPage = 0;
+
+  if (file.type === 'application/pdf') {
+    const ab = await file.arrayBuffer();
+    const pdfDoc = await pdfjsLib.getDocument({ data: ab }).promise;
+    totalPages = pdfDoc.numPages;
+    for (let i = 1; i <= totalPages; i++) {
+      const page = await pdfDoc.getPage(i);
+      const vp = page.getViewport({ scale: 2.0 });
+      const c = document.createElement('canvas');
+      c.width = vp.width; c.height = vp.height;
+      await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+      pages.push(c);
+      pageMasks.push([]);
+    }
+  } else {
+    const img = await loadImage(URL.createObjectURL(file));
+    const c = document.createElement('canvas');
+    c.width = img.naturalWidth; c.height = img.naturalHeight;
+    c.getContext('2d').drawImage(img, 0, 0);
+    pages.push(c);
+    pageMasks.push([]);
+    totalPages = 1;
+  }
+
+  const pn = document.getElementById('pageNav');
+  pn.style.display = totalPages > 1 ? 'flex' : 'none';
+  document.getElementById('editorArea').classList.add('show');
+  dropzone.style.display = 'none';
+  renderPage(0);
+}
+
+function loadImage(src) {
+  return new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = src; });
+}
+
+function renderPage(idx) {
+  currentPage = idx;
+  const src = pages[idx];
+  canvas.width = src.width; canvas.height = src.height;
+  ctx.drawImage(src, 0, 0);
+  redrawMasks();
+  updatePageNav();
+  updateMaskList();
+}
+
+function changePage(dir) {
+  const next = currentPage + dir;
+  if (next < 0 || next >= totalPages) return;
+  renderPage(next);
+}
+
+function updatePageNav() {
+  document.getElementById('pageLabel').textContent = `Page ${currentPage+1} / ${totalPages}`;
+  document.getElementById('prevPage').disabled = currentPage === 0;
+  document.getElementById('nextPage').disabled = currentPage === totalPages - 1;
+}
+
+// ---- Mode ----
+function setMode(m) {
+  mode = m;
+  canvas.className = m === 'select' ? 'select-mode' : '';
+  document.getElementById('drawBtn').style.background = m === 'draw' ? 'var(--accent)' : 'var(--surface2)';
+  document.getElementById('drawBtn').style.color = m === 'draw' ? '#000' : 'var(--text)';
+  document.getElementById('selectBtn').style.background = m === 'select' ? 'var(--accent)' : 'var(--surface2)';
+  document.getElementById('selectBtn').style.color = m === 'select' ? '#000' : 'var(--text)';
+}
+
+function setFill(c, el) {
+  fillColor = c;
+  document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ---- Draw masks ----
+canvas.addEventListener('mousedown', e => {
+  const r = canvas.getBoundingClientRect();
+  const scX = canvas.width / r.width, scY = canvas.height / r.height;
+  const mx = (e.clientX - r.left) * scX, my = (e.clientY - r.top) * scY;
+
+  if (mode === 'select') {
+    selectedMask = -1;
+    const masks = pageMasks[currentPage];
+    for (let i = masks.length - 1; i >= 0; i--) {
+      const m = masks[i];
+      if (mx >= m.x && mx <= m.x + m.w && my >= m.y && my <= m.y + m.h) {
+        selectedMask = i;
+        dragOffX = mx - m.x;
+        dragOffY = my - m.y;
+        break;
+      }
+    }
+    isDragging = selectedMask !== -1;
+  } else {
+    startX = mx; startY = my;
+    isDragging = true;
+  }
+});
+
+canvas.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  const r = canvas.getBoundingClientRect();
+  const scX = canvas.width / r.width, scY = canvas.height / r.height;
+  const mx = (e.clientX - r.left) * scX, my = (e.clientY - r.top) * scY;
+
+  if (mode === 'select' && selectedMask !== -1) {
+    const m = pageMasks[currentPage][selectedMask];
+    m.x = mx - dragOffX; m.y = my - dragOffY;
+    ctx.drawImage(pages[currentPage], 0, 0);
+    redrawMasks();
+  } else if (mode === 'draw') {
+    ctx.drawImage(pages[currentPage], 0, 0);
+    redrawMasks();
+    const w = mx - startX, h = my - startY;
+    ctx.fillStyle = fillColor;
+    ctx.fillRect(startX, startY, w, h);
+    ctx.strokeStyle = '#d97706';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(startX, startY, w, h);
+  }
+});
+
+canvas.addEventListener('mouseup', e => {
+  if (!isDragging) return;
+  isDragging = false;
+  const r = canvas.getBoundingClientRect();
+  const scX = canvas.width / r.width, scY = canvas.height / r.height;
+  const mx = (e.clientX - r.left) * scX, my = (e.clientY - r.top) * scY;
+
+  if (mode === 'draw') {
+    const w = mx - startX, h = my - startY;
+    if (Math.abs(w) > 5 && Math.abs(h) > 5) {
+      const label = document.getElementById('labelText').value.trim();
+      const fsz = parseInt(document.getElementById('fszRange').value);
+      pageMasks[currentPage].push({
+        x: Math.min(startX, mx), y: Math.min(startY, my),
+        w: Math.abs(w), h: Math.abs(h),
+        fill: fillColor, label, fsz
+      });
+      ctx.drawImage(pages[currentPage], 0, 0);
+      redrawMasks();
+      updateMaskList();
+    }
+  } else if (mode === 'select') {
+    ctx.drawImage(pages[currentPage], 0, 0);
+    redrawMasks();
+    updateMaskList();
+  }
+});
+
+canvas.addEventListener('mouseleave', () => {
+  if (isDragging && mode === 'draw') {
+    isDragging = false;
+    ctx.drawImage(pages[currentPage], 0, 0);
+    redrawMasks();
+  }
+});
+
+function redrawMasks() {
+  const masks = pageMasks[currentPage];
+  for (const m of masks) drawMask(m);
+}
+
+function drawMask(m) {
+  ctx.fillStyle = m.fill;
+  ctx.fillRect(m.x, m.y, m.w, m.h);
+  if (m.label) {
+    const bright = m.fill === '#ffffff' || m.fill === '#d97706' ? '#111' : '#fff';
+    ctx.fillStyle = bright;
+    ctx.font = `bold ${m.fsz}px sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(m.label, m.x + m.w/2, m.y + m.h/2, m.w - 8);
+  }
+}
+
+function updateMaskList() {
+  const masks = pageMasks[currentPage];
+  document.getElementById('maskCount').textContent = masks.length;
+  const list = document.getElementById('maskList');
+  list.innerHTML = masks.map((m,i) =>
+    `<div class="mask-item">
+      <span>Mask ${i+1}${m.label ? ': '+m.label : ''}</span>
+      <button class="btn btn-danger btn-sm" onclick="removeMask(${i})">✕</button>
+    </div>`
+  ).join('');
+}
+
+function removeMask(i) {
+  pageMasks[currentPage].splice(i, 1);
+  ctx.drawImage(pages[currentPage], 0, 0);
+  redrawMasks();
+  updateMaskList();
+}
+
+function undoLast() {
+  if (!pageMasks[currentPage].length) return;
+  pageMasks[currentPage].pop();
+  ctx.drawImage(pages[currentPage], 0, 0);
+  redrawMasks();
+  updateMaskList();
+}
+
+function clearAll() {
+  pageMasks[currentPage] = [];
+  ctx.drawImage(pages[currentPage], 0, 0);
+  updateMaskList();
+}
+
+// ---- Render final page to canvas ----
+function renderFlatPage(idx) {
+  const src = pages[idx];
+  const c = document.createElement('canvas');
+  c.width = src.width; c.height = src.height;
+  const cx = c.getContext('2d');
+  cx.drawImage(src, 0, 0);
+  for (const m of pageMasks[idx]) {
+    cx.fillStyle = m.fill;
+    cx.fillRect(m.x, m.y, m.w, m.h);
+    if (m.label) {
+      const bright = m.fill === '#ffffff' || m.fill === '#d97706' ? '#111' : '#fff';
+      cx.fillStyle = bright;
+      cx.font = `bold ${m.fsz}px sans-serif`;
+      cx.textAlign = 'center';
+      cx.textBaseline = 'middle';
+      cx.fillText(m.label, m.x + m.w/2, m.y + m.h/2, m.w - 8);
+    }
+  }
+  return c;
+}
+
+// ---- Download ----
+function downloadPNG() {
+  const c = renderFlatPage(currentPage);
+  const a = document.createElement('a');
+  a.href = c.toDataURL('image/png');
+  a.download = `aadhaar-masked-p${currentPage+1}.png`;
+  a.click();
+}
+
+async function downloadPDF() {
+  const { PDFDocument } = PDFLib;
+  const doc = await PDFDocument.create();
+  for (let i = 0; i < totalPages; i++) {
+    const c = renderFlatPage(i);
+    const jpgBytes = await fetch(c.toDataURL('image/jpeg', 0.95)).then(r => r.arrayBuffer());
+    const img = await doc.embedJpg(jpgBytes);
+    const page = doc.addPage([img.width, img.height]);
+    page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
+  }
+  const bytes = await doc.save();
+  const blob = new Blob([bytes], { type: 'application/pdf' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'aadhaar-masked.pdf';
+  a.click();
+}
+
+// touch support
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  const me = new MouseEvent('mousedown', { clientX: t.clientX, clientY: t.clientY });
+  canvas.dispatchEvent(me);
+}, { passive: false });
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  canvas.dispatchEvent(new MouseEvent('mousemove', { clientX: t.clientX, clientY: t.clientY }));
+}, { passive: false });
+canvas.addEventListener('touchend', e => {
+  e.preventDefault();
+  const t = e.changedTouches[0];
+  canvas.dispatchEvent(new MouseEvent('mouseup', { clientX: t.clientX, clientY: t.clientY }));
+}, { passive: false });
+
+setMode('draw');
+</script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('/aadhaar-mask/sw.js');</script>
+</body>
+</html>
